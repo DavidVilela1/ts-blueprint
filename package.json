@@ -3,7 +3,7 @@
   "displayName": "TSBlueprint",
   "description": "Live, interactive diagrams and documentation of the interfaces and type models in the current TypeScript file.",
   "version": "0.1.0",
-  "publisher": "tsblueprint",
+  "publisher": "davidtools",
   "license": "MIT",
   "engines": {
     "vscode": "^1.90.0"
@@ -32,7 +32,7 @@
         "command": "tsblueprint.openPreview",
         "title": "Open Blueprint",
         "category": "TSBlueprint",
-        "icon": "$(type-hierarchy)"
+        "icon": "images/icon.png"
       }
     ],
     "menus": {
@@ -61,7 +61,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "vscode:prepublish": "npm run typecheck && npm run test && npm run build:prod",
-    "package": "vsce package --no-dependencies"
+    "package": "vsce package --no-dependencies",
+    "publish": "vsce publish --no-dependencies"
   },
   "devDependencies": {
     "@types/node": "^20.14.0",
@@ -74,6 +75,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-user/ts-blueprint.git"
+    "url": "https://github.com/DavidVilela1/ts-blueprint.git"
   }
 }
