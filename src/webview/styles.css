@@ -1,0 +1,620 @@
+/*
+ * TSBlueprint — Webview styles.
+ * Every colour comes from VS Code theme tokens, so light, dark and high-contrast themes
+ * (including user themes) are followed automatically. Fallbacks only apply outside VS Code.
+ */
+
+:root {
+  --tsb-radius: 4px;
+  --tsb-gap: 8px;
+  --tsb-border: var(--vscode-widget-border, var(--vscode-panel-border, rgba(128, 128, 128, 0.35)));
+  --tsb-card-bg: var(--vscode-editorWidget-background, var(--vscode-editor-background));
+  --tsb-hover-bg: var(--vscode-list-hoverBackground, rgba(128, 128, 128, 0.12));
+  --tsb-muted: var(--vscode-descriptionForeground, rgba(128, 128, 128, 0.9));
+  --tsb-link: var(--vscode-textLink-foreground, #3794ff);
+  --tsb-link-active: var(--vscode-textLink-activeForeground, var(--tsb-link));
+  --tsb-focus: var(--vscode-focusBorder, #007fd4);
+  --tsb-mono: var(--vscode-editor-font-family, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
+  --tsb-mono-size: var(--vscode-editor-font-size, 13px);
+  --tsb-interface: var(--vscode-symbolIcon-interfaceForeground, #75beff);
+  --tsb-type: var(--vscode-symbolIcon-typeParameterForeground, #ee9d28);
+  --tsb-property: var(--vscode-symbolIcon-propertyForeground, var(--tsb-muted));
+  --tsb-method: var(--vscode-symbolIcon-methodForeground, #b180d7);
+  --tsb-warning: var(--vscode-editorWarning-foreground, #cca700);
+  --tsb-error: var(--vscode-editorError-foreground, #f14c4c);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--vscode-editor-background);
+  color: var(--vscode-foreground);
+  font-family: var(--vscode-font-family);
+  font-size: var(--vscode-font-size);
+  line-height: 1.45;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 1px solid var(--tsb-focus);
+  outline-offset: 1px;
+}
+
+/* ------------------------------------------------------------------ app shell ---------- */
+
+.tsb-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.tsb-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 14px;
+  background: var(--vscode-editor-background);
+  border-bottom: 1px solid var(--tsb-border);
+}
+
+.tsb-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  min-width: 0;
+}
+
+.tsb-file {
+  margin: 0;
+  font-size: 1.1em;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tsb-stats {
+  flex: 1;
+  min-width: 0;
+  color: var(--tsb-muted);
+  font-size: 0.9em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tsb-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--tsb-gap) 12px;
+}
+
+.tsb-search {
+  flex: 1 1 200px;
+  min-width: 140px;
+  padding: 4px 8px;
+  color: var(--vscode-input-foreground);
+  background: var(--vscode-input-background);
+  border: 1px solid var(--vscode-input-border, transparent);
+  border-radius: 2px;
+  font: inherit;
+}
+
+.tsb-search::placeholder {
+  color: var(--vscode-input-placeholderForeground, var(--tsb-muted));
+}
+
+.tsb-segmented {
+  display: inline-flex;
+  border: 1px solid var(--vscode-input-border, var(--tsb-border));
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.tsb-segment {
+  padding: 3px 10px;
+  color: var(--tsb-muted);
+}
+
+.tsb-segment + .tsb-segment {
+  border-left: 1px solid var(--vscode-input-border, var(--tsb-border));
+}
+
+.tsb-segment:hover {
+  background: var(--tsb-hover-bg);
+}
+
+.tsb-segment[aria-pressed='true'] {
+  color: var(--vscode-button-foreground);
+  background: var(--vscode-button-background);
+}
+
+.tsb-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.tsb-checkbox input {
+  margin: 0;
+  accent-color: var(--vscode-button-background);
+}
+
+.tsb-bulk {
+  display: inline-flex;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.tsb-link-button {
+  color: var(--tsb-link);
+}
+
+.tsb-link-button:hover {
+  color: var(--tsb-link-active);
+  text-decoration: underline;
+}
+
+.tsb-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--tsb-radius);
+  color: var(--vscode-icon-foreground, var(--vscode-foreground));
+}
+
+.tsb-icon-button:hover {
+  background: var(--vscode-toolbar-hoverBackground, var(--tsb-hover-bg));
+}
+
+.tsb-button {
+  margin-top: 8px;
+  padding: 4px 12px;
+  border-radius: 2px;
+  color: var(--vscode-button-foreground);
+  background: var(--vscode-button-background);
+}
+
+.tsb-button:hover {
+  background: var(--vscode-button-hoverBackground, var(--vscode-button-background));
+}
+
+/* ------------------------------------------------------------------ banners ------------ */
+
+.tsb-banner {
+  margin: 12px 14px 0;
+  padding: 10px 12px;
+  border-radius: var(--tsb-radius);
+  border: 1px solid var(--tsb-border);
+  border-left-width: 4px;
+}
+
+.tsb-banner--warning {
+  border-color: var(--vscode-inputValidation-warningBorder, var(--tsb-warning));
+  background: var(--vscode-inputValidation-warningBackground, transparent);
+}
+
+.tsb-banner--error {
+  border-color: var(--vscode-inputValidation-errorBorder, var(--tsb-error));
+  background: var(--vscode-inputValidation-errorBackground, transparent);
+}
+
+.tsb-banner-title {
+  margin: 0 0 2px;
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.tsb-banner-detail {
+  margin: 0;
+  color: var(--tsb-muted);
+}
+
+.tsb-diagnostics {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-family: var(--tsb-mono);
+  font-size: var(--tsb-mono-size);
+}
+
+.tsb-diagnostic {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+}
+
+.tsb-diagnostic-location {
+  flex: none;
+  color: var(--tsb-link);
+}
+
+.tsb-diagnostic-location:hover {
+  text-decoration: underline;
+}
+
+.tsb-diagnostic-message {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.tsb-diagnostic-code {
+  flex: none;
+  color: var(--tsb-muted);
+}
+
+/* ------------------------------------------------------------------ content ------------ */
+
+.tsb-content {
+  flex: 1;
+  padding: 12px 14px 24px;
+}
+
+.tsb-empty {
+  max-width: 420px;
+  margin: 12vh auto 0;
+  text-align: center;
+}
+
+.tsb-empty-title {
+  margin: 0 0 6px;
+  font-size: 1.15em;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.tsb-empty-detail {
+  margin: 0;
+  color: var(--tsb-muted);
+}
+
+.tsb-models {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: opacity 120ms ease;
+}
+
+.tsb-models.tsb-partial,
+.tsb-models.tsb-stale {
+  opacity: 0.7;
+}
+
+/* ------------------------------------------------------------------ cards -------------- */
+
+.tsb-card {
+  background: var(--tsb-card-bg);
+  border: 1px solid var(--vscode-contrastBorder, var(--tsb-border));
+  border-left: 3px solid var(--tsb-interface);
+  border-radius: var(--tsb-radius);
+}
+
+.tsb-card--type {
+  border-left-color: var(--tsb-type);
+}
+
+.tsb-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px 4px 4px;
+}
+
+.tsb-card-toggle {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+  padding: 4px 6px;
+  border-radius: var(--tsb-radius);
+  text-align: left;
+}
+
+.tsb-card-toggle:hover {
+  background: var(--tsb-hover-bg);
+}
+
+.tsb-chevron {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  margin-right: 2px;
+  border-right: 1.5px solid var(--tsb-muted);
+  border-bottom: 1.5px solid var(--tsb-muted);
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 120ms ease;
+}
+
+.tsb-collapsed .tsb-chevron {
+  transform: translateY(0) rotate(-45deg);
+}
+
+.tsb-kind {
+  flex: none;
+  font-size: 0.8em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--tsb-interface);
+}
+
+.tsb-card--type .tsb-kind {
+  color: var(--tsb-type);
+}
+
+.tsb-namespace {
+  color: var(--tsb-muted);
+  font-family: var(--tsb-mono);
+}
+
+.tsb-name {
+  font-family: var(--tsb-mono);
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tsb-type-params {
+  font-family: var(--tsb-mono);
+  color: var(--tsb-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.tsb-count {
+  flex: none;
+  margin-left: auto;
+  padding: 0 6px;
+  border-radius: 10px;
+  font-size: 0.85em;
+  color: var(--vscode-badge-foreground);
+  background: var(--vscode-badge-background);
+}
+
+.tsb-flags {
+  display: inline-flex;
+  gap: 4px;
+  flex: none;
+}
+
+.tsb-flag,
+.tsb-match-badge {
+  padding: 0 6px;
+  border: 1px solid var(--tsb-border);
+  border-radius: 10px;
+  font-size: 0.8em;
+  color: var(--tsb-muted);
+  white-space: nowrap;
+}
+
+.tsb-flag--warning {
+  color: var(--tsb-warning);
+  border-color: var(--tsb-warning);
+}
+
+.tsb-match-badge {
+  color: var(--tsb-link);
+  border-color: var(--tsb-link);
+}
+
+.tsb-card-body {
+  padding: 2px 12px 10px 30px;
+  border-top: 1px solid var(--tsb-border);
+}
+
+.tsb-docs {
+  margin: 8px 0 4px;
+  color: var(--tsb-muted);
+  white-space: pre-wrap;
+}
+
+.tsb-muted {
+  margin: 8px 0 0;
+  color: var(--tsb-muted);
+  font-style: italic;
+}
+
+.tsb-relation-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+  margin-top: 8px;
+}
+
+.tsb-relation-label {
+  color: var(--tsb-muted);
+  font-size: 0.85em;
+}
+
+.tsb-chip {
+  padding: 0 7px;
+  border-radius: 10px;
+  border: 1px solid var(--tsb-border);
+  font-family: var(--tsb-mono);
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+.tsb-chip--link {
+  color: var(--tsb-link);
+}
+
+.tsb-chip--link:hover {
+  color: var(--tsb-link-active);
+  border-color: var(--tsb-link);
+}
+
+.tsb-chip--external {
+  color: var(--tsb-muted);
+  border-style: dashed;
+}
+
+.tsb-chip--small {
+  font-size: 0.8em;
+  margin-left: 4px;
+}
+
+/* ------------------------------------------------------------------ members ------------ */
+
+.tsb-members {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  font-family: var(--tsb-mono);
+  font-size: var(--tsb-mono-size);
+}
+
+.tsb-member {
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.tsb-member:hover {
+  background: var(--tsb-hover-bg);
+}
+
+.tsb-member.tsb-match {
+  background: var(--vscode-editor-findMatchHighlightBackground, var(--tsb-hover-bg));
+}
+
+.tsb-member-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0;
+  row-gap: 2px;
+}
+
+.tsb-member-glyph {
+  flex: none;
+  width: 6px;
+  height: 6px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--tsb-property);
+  transform: translateY(-2px);
+}
+
+.tsb-member--method .tsb-member-glyph,
+.tsb-member--call .tsb-member-glyph,
+.tsb-member--construct .tsb-member-glyph {
+  background: var(--tsb-method);
+  border-radius: 1px;
+}
+
+.tsb-member--index .tsb-member-glyph {
+  background: transparent;
+  border: 1px solid var(--tsb-property);
+  border-radius: 1px;
+}
+
+.tsb-modifier {
+  margin-right: 6px;
+  color: var(--vscode-debugTokenExpression-name, var(--tsb-method));
+}
+
+.tsb-member-name {
+  color: var(--vscode-editor-foreground, var(--vscode-foreground));
+}
+
+.tsb-member-name:hover {
+  color: var(--tsb-link);
+  text-decoration: underline;
+}
+
+.tsb-optional,
+.tsb-punct {
+  color: var(--tsb-muted);
+  white-space: pre;
+}
+
+.tsb-type {
+  color: var(--vscode-debugTokenExpression-type, var(--tsb-interface));
+  overflow-wrap: anywhere;
+}
+
+.tsb-member-docs {
+  margin: 0 0 2px 14px;
+  font-family: var(--vscode-font-family);
+  font-size: 0.9em;
+  color: var(--tsb-muted);
+  white-space: pre-wrap;
+}
+
+.tsb-deprecated > .tsb-member-line .tsb-member-name,
+.tsb-card.tsb-deprecated .tsb-name {
+  text-decoration: line-through;
+}
+
+/* ------------------------------------------------------------------ jump highlight ----- */
+
+@keyframes tsb-flash {
+  from {
+    box-shadow: 0 0 0 2px var(--tsb-focus);
+  }
+  to {
+    box-shadow: 0 0 0 2px transparent;
+  }
+}
+
+.tsb-card.tsb-flash {
+  animation: tsb-flash 1.1s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tsb-chevron,
+  .tsb-models {
+    transition: none;
+  }
+  .tsb-card.tsb-flash {
+    animation: none;
+    outline: 2px solid var(--tsb-focus);
+  }
+}
+
+/* High-contrast themes: rely on contrast borders instead of subtle backgrounds. */
+body.vscode-high-contrast .tsb-card,
+body.vscode-high-contrast-light .tsb-card {
+  border-color: var(--vscode-contrastBorder);
+}
+
+body.vscode-high-contrast .tsb-member:hover,
+body.vscode-high-contrast .tsb-card-toggle:hover {
+  outline: 1px dashed var(--vscode-contrastActiveBorder, var(--tsb-focus));
+  background: transparent;
+}

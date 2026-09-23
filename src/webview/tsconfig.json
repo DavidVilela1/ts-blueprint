@@ -1,0 +1,10 @@
+{
+  // Browser-side type-check: DOM libs, no Node or vscode typings.
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": []
+  },
+  "include": ["./**/*.ts", "../types/**/*.ts", "../../test/webview/**/*.ts"],
+  "exclude": []
+}
