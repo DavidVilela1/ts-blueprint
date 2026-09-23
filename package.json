@@ -8,8 +8,19 @@
   "engines": {
     "vscode": "^1.90.0"
   },
-  "categories": ["Visualization", "Programming Languages", "Other"],
-  "keywords": ["typescript", "ast", "schema", "diagram", "interfaces", "documentation"],
+  "categories": [
+    "Visualization",
+    "Programming Languages",
+    "Other"
+  ],
+  "keywords": [
+    "typescript",
+    "ast",
+    "schema",
+    "diagram",
+    "interfaces",
+    "documentation"
+  ],
   "main": "./dist/extension.js",
   "activationEvents": [
     "onLanguage:typescript",
@@ -47,13 +58,19 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "vscode:prepublish": "npm run typecheck && npm run test && npm run build:prod"
+    "vscode:prepublish": "npm run typecheck && npm run test && npm run build:prod",
+    "package": "vsce package --no-dependencies"
   },
   "devDependencies": {
     "@types/node": "^20.14.0",
     "@types/vscode": "^1.90.0",
+    "@vscode/vsce": "^3.2.0",
     "esbuild": "^0.25.0",
     "typescript": "^5.6.0",
     "vitest": "^3.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-user/ts-blueprint.git"
   }
 }
