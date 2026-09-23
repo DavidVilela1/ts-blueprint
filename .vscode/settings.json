@@ -1,0 +1,12 @@
+{
+  // Use the workspace TypeScript version so the editor matches `npm run typecheck`.
+  "typescript.tsdk": "node_modules/typescript/lib",
+  // Keep build output out of search and file watchers.
+  "search.exclude": {
+    "dist": true,
+    "node_modules": true
+  },
+  "files.watcherExclude": {
+    "**/dist/**": true
+  }
+}

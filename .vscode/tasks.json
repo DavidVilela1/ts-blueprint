@@ -1,0 +1,101 @@
+// Build tasks for TSBlueprint.
+//
+// "watch" (the default build task, Ctrl+Shift+B) runs three background tasks in parallel:
+//   - npm: watch               esbuild in watch mode: dist/extension.js (Node) and
+//                              dist/webview.js + dist/webview.css (browser), rebuilt on save
+//   - npm: watch:tsc:host      type-checks the extension host code (tsconfig.json)
+//   - npm: watch:tsc:webview   type-checks the Webview code (src/webview/tsconfig.json)
+// esbuild does not type-check, so the tsc tasks are what put type errors in the Problems panel.
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "watch",
+      "dependsOn": ["npm: watch", "npm: watch:tsc:host", "npm: watch:tsc:webview"],
+      "dependsOrder": "parallel",
+      "presentation": {
+        "reveal": "never"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "type": "npm",
+      "script": "watch",
+      "label": "npm: watch",
+      "detail": "esbuild watch: extension host (Node) + Webview client (browser)",
+      "isBackground": true,
+      "presentation": {
+        "reveal": "never",
+        "group": "watchers"
+      },
+      "group": "build",
+      "problemMatcher": {
+        "owner": "esbuild",
+        "source": "esbuild",
+        "fileLocation": ["relative", "${workspaceFolder}"],
+        "pattern": {
+          "regexp": "^(.+?):(\\d+):(\\d+): (error|warning): (.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        },
+        "background": {
+          "activeBegins": true,
+          "beginsPattern": "^\\[watch\\] build started",
+          "endsPattern": "^\\[watch\\] build finished"
+        }
+      }
+    },
+    {
+      "type": "npm",
+      "script": "watch:tsc:host",
+      "label": "npm: watch:tsc:host",
+      "detail": "tsc --watch type-check for the extension host",
+      "isBackground": true,
+      "presentation": {
+        "reveal": "never",
+        "group": "watchers"
+      },
+      "group": "build",
+      "problemMatcher": "$tsc-watch"
+    },
+    {
+      "type": "npm",
+      "script": "watch:tsc:webview",
+      "label": "npm: watch:tsc:webview",
+      "detail": "tsc --watch type-check for the Webview client",
+      "isBackground": true,
+      "presentation": {
+        "reveal": "never",
+        "group": "watchers"
+      },
+      "group": "build",
+      "problemMatcher": "$tsc-watch"
+    },
+    {
+      "type": "npm",
+      "script": "build",
+      "label": "npm: build",
+      "detail": "One-off development build of both bundles",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "type": "npm",
+      "script": "test",
+      "label": "npm: test",
+      "detail": "Run the vitest suite once",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}

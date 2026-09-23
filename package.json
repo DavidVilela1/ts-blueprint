@@ -55,6 +55,8 @@
     "build": "node esbuild.mjs",
     "build:prod": "node esbuild.mjs --production",
     "watch": "node esbuild.mjs --watch",
+    "watch:tsc:host": "tsc --noEmit --watch --preserveWatchOutput --project tsconfig.json",
+    "watch:tsc:webview": "tsc --noEmit --watch --preserveWatchOutput --project src/webview/tsconfig.json",
     "typecheck": "tsc --noEmit && tsc --noEmit -p src/webview",
     "test": "vitest run",
     "test:watch": "vitest",

@@ -1,0 +1,29 @@
+// Debug configurations for TSBlueprint.
+// F5 runs "Run Extension": it starts the "watch" task (esbuild for both bundles + tsc for both
+// targets), waits for the first build to finish, then opens an Extension Development Host
+// that loads the extension from this folder.
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": ["--extensionDevelopmentPath=${workspaceFolder}"],
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+      "sourceMaps": true,
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+      "preLaunchTask": "watch"
+    },
+    {
+      "name": "Run Extension (other extensions disabled)",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": ["--extensionDevelopmentPath=${workspaceFolder}", "--disable-extensions"],
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+      "sourceMaps": true,
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+      "preLaunchTask": "watch"
+    }
+  ]
+}

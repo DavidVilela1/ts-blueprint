@@ -1,0 +1,4 @@
+{
+  // Recommended when working on this repository.
+  "recommendations": ["vitest.explorer"]
+}
