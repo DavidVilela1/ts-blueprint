@@ -1,0 +1,59 @@
+{
+  "name": "ts-blueprint",
+  "displayName": "TSBlueprint",
+  "description": "Live, interactive diagrams and documentation of the interfaces and type models in the current TypeScript file.",
+  "version": "0.1.0",
+  "publisher": "tsblueprint",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": ["Visualization", "Programming Languages", "Other"],
+  "keywords": ["typescript", "ast", "schema", "diagram", "interfaces", "documentation"],
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onLanguage:typescript",
+    "onLanguage:typescriptreact"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "tsblueprint.openPreview",
+        "title": "Open Blueprint",
+        "category": "TSBlueprint",
+        "icon": "$(type-hierarchy)"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "tsblueprint.openPreview",
+          "when": "resourceExtname == .ts || resourceExtname == .tsx",
+          "group": "navigation"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "tsblueprint.openPreview",
+          "when": "resourceExtname == .ts || resourceExtname == .tsx"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "build": "node esbuild.mjs",
+    "build:prod": "node esbuild.mjs --production",
+    "watch": "node esbuild.mjs --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "vscode:prepublish": "npm run typecheck && npm run test && npm run build:prod"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/vscode": "^1.90.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.6.0",
+    "vitest": "^3.2.0"
+  }
+}
